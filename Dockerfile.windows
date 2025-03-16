@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+WORKDIR /app
+
+COPY . /app
+
+SHELL [ "powershell", "-Command" ]
+RUN Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.9.9/python-3.9.9-amd64.exe" -OutFile "python.exe"; \
+    Start-Process -Wait -FilePath ".\\python.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1"
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]

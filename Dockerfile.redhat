@@ -1,0 +1,10 @@
+FROM registry.access.redhat.com/ubi8/ubi
+WORKDIR /app
+
+COPY . /app
+RUN dnf update iy
+RUN dng install -y python3
+
+EXPOSE 5000
+
+CMD ["python3", "app.py"]
